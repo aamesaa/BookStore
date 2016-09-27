@@ -1,0 +1,15 @@
+﻿@model eCommerceApp.Models.Category
+@{
+    ViewBag.Title = "CreateCategories";
+}
+
+<h2>Create Categories</h2>
+<form method="post" action="/Categories/CreateCategories">
+
+    <div class="form-group">
+        <label for="CategoryName">Category Name</label>
+        <input type="text" class="form-control" name="CategoryName" placeholder="Category Name" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>

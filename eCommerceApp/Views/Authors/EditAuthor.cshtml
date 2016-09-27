@@ -1,0 +1,23 @@
+﻿@model eCommerceApp.Models.Author
+@{
+    ViewBag.Title = "EditAuthor";
+}
+
+<h2>EditAuthor</h2>
+<form method="post" action="/Authors/EditAuthor/@Model.AuthorID">
+    <div class="form-group">
+        <label for="FirstName">Firstname</label>
+        <input type="text" class="form-control" name="FirstName" placeholder="Firstname" value="@Model.FirstName" />
+    </div>
+    <div class="form-group">
+        <label for="LastName">Lastname</label>
+        <input type="text" class="form-control" name="LastName" placeholder="Lastname" value="@Model.LastName" />
+    </div>
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="email" class="form-control" name="Email" placeholder="Email" value="@Model.Email" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-success">Submit</button>
+  
+    </form>

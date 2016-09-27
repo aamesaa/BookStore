@@ -1,0 +1,85 @@
+﻿@model IEnumerable<eCommerceApp.Models.ShoppingCart>
+   
+@{
+    ViewBag.Title = "OrderNow";
+}
+
+
+
+<h2>OrderNow</h2>
+@Html.Raw(ViewBag.Msg)
+@Html.Raw(ViewBag.Msg2)
+<div class="col-md-2"></div>
+
+<div class="col-md-8">
+    <table class="table table-bordered table-striped table-condensed">
+        <tr>
+
+            <th style="width:70px;">
+                Item
+            </th>
+            <th style="width:270px;">
+                @Html.DisplayNameFor(model => model.Book.Title)
+            </th>
+            <th style="width:65px" ;>
+                @Html.DisplayNameFor(model => model.Quantity)
+                
+            </th>
+
+            <th style="width:60px;">
+                @Html.DisplayNameFor(model => model.Book.Price)
+            </th>
+            <th style="width:70px;">
+                Subtotal
+            </th>
+
+        </tr>
+
+        @{ decimal total = 0;}
+       
+        @foreach (var item in Model)
+        {
+            var price = string.Format("{0:N0}", item.Book.Price);
+            var subtotal = item.Quantity * item.Book.Price;
+            total += subtotal;
+            <tr>
+                <td>
+                    <img align="middle" src="~/Content/Images/@item.Book.CoverImage" width="65" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                   
+                </td>
+                <td>
+                    @price
+                </td>
+                <td>
+                    @string.Format("{0:N0}", subtotal)
+                </td>
+
+
+            </tr>
+        }
+        <tr>
+            <td colspan="4"><strong>Grand Total :</strong></td>
+            <td>Rp @string.Format("{0:N0}", total)</td>
+        </tr>
+
+    </table>
+   
+
+
+    <div class="btn btn-default">
+        @Html.ActionLink("Submit Order", "Final", "Order")
+    </div>
+
+        
+  
+
+    <br />
+    <br />
+
+</div>

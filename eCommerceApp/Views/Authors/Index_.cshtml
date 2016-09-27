@@ -1,0 +1,35 @@
+﻿@model IEnumerable<eCommerceApp.Models.Author>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Author List</h2>
+@Html.Raw(ViewBag.Msg)
+<br />
+@Html.ActionLink("Add Author", "CreateAuthor", "AuthorsController", new { @class = "btn btn-success" })<br />
+<br />
+
+<table class="table table-striped">
+    <tr>
+        <th>Author ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.AuthorID</td>
+            <td>@a.FirstName</td>
+
+            <td>@a.LastName</td>
+            <td>@a.Email</td>
+            <td>@Html.ActionLink("Edit", "EditAuthor", new { id = a.AuthorID })</td>
+            <td>@Html.ActionLink("Delete", "DeleteAuthor", new { id = a.AuthorID }, htmlAttributes: new { onclick = "return confirm('Are you sure to delete this record ?')" })</td>
+        </tr>
+    }
+
+</table>

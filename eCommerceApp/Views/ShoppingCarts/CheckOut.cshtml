@@ -1,0 +1,78 @@
+﻿@model IEnumerable<eCommerceApp.Models.ShoppingCart>
+
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+<h2>CheckOut</h2>
+@Html.Raw(ViewBag.Msg)
+<div class="col-md-2"></div>
+
+<div class="col-md-8">
+    <table class="table table-bordered table-striped table-condensed">
+        <tr>
+
+            <th style="width:70px;">
+                Item
+            </th>
+            <th style="width:270px;">
+                @Html.DisplayNameFor(model => model.Book.Title)
+            </th>
+            <th style="width:65px" ;>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+
+            <th style="width:60px;">
+                @Html.DisplayNameFor(model => model.Book.Price)
+            </th>
+            <th style="width:70px;">
+                Subtotal
+            </th>
+            
+        </tr>
+
+        @{ decimal total = 0;}
+
+        @foreach (var item in Model)
+        {
+            var price = string.Format("{0:N0}", item.Book.Price);
+            var subtotal = item.Quantity * item.Book.Price;
+            total += subtotal;
+            <tr>
+                <td>
+                    <img align="middle" src="~/Content/Images/@item.Book.CoverImage" width="65" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @price
+                </td>
+                <td>
+                    @string.Format("{0:N0}", subtotal)
+                </td>
+
+                
+            </tr>
+        }
+
+    </table>
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+            <strong>Grand Total :</strong>Rp @string.Format("{0:N0}", total)
+        </div>
+    </div>
+
+    <a href="~/Order/OrderNow">
+        <input type="submit" class="btn btn-success" formmethod="post" value="Order Now"/>
+    </a>
+
+    <br />
+    <br />
+    
+</div>

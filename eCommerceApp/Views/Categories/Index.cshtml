@@ -1,0 +1,34 @@
+﻿@model IEnumerable<eCommerceApp.Models.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Category List</h2>
+
+@Html.Raw(ViewBag.Msg) <!--raw: biar html nya keolah, ga di pt=rint-->
+<br />
+@Html.ActionLink("Add Category", "CreateCategories","CategoriesController",new {@class="btn btn-success" })<br />
+<br />
+
+<table class="table table-striped">
+    <tr>
+        <th>Category Name</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.CategoryName</td>
+            <td>@Html.ActionLink("Edit", "EditCategories", new { id= c.CategoryID})</td>
+            <td>@Html.ActionLink("Delete", "DeleteCategories", new { id = c.CategoryID },
+                htmlAttributes: new { onclick = "return confirm('Are you sure to delete this record ?')" }
+               )</td>
+           
+        </tr>
+    }
+
+</table>
+
+

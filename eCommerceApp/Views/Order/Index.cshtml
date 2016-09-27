@@ -1,0 +1,64 @@
+﻿@model IEnumerable<eCommerceApp.ViewModel.OrderVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Order Summary</h2>
+
+<p>
+@{ var o = Model;}   
+@{ string name = "";}
+@{ string IDorder = "";}
+    
+    @foreach (var item in Model)
+    {
+        name = item.CustomerName;
+        IDorder = item.OrderID.ToString();
+    }
+    <h5>Order ID : @IDorder</h5>
+    <h5>Name     : @name</h5>
+<table class="table table-bordered table-striped" >
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>Subtotal</th>
+    </tr>
+    @{decimal? total = 0;}
+@foreach (var item in Model) {
+    var subtotal = item.Quantity * item.Price;
+   
+    total += subtotal;
+    
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price);
+        </td>
+        <td>
+         Rp  @string.Format("{0:N0}", subtotal)
+        </td>
+    </tr>
+}
+
+    <tr>
+        <td colspan="3"><strong>Grand Total :</strong></td>
+        <td>Rp @string.Format("{0:N0}", total)</td>
+    </tr>
+
+</table>

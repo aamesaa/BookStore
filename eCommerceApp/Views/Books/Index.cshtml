@@ -1,0 +1,128 @@
+﻿@model IEnumerable<eCommerceApp.Models.Book>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Book List</h2>
+@Html.Raw(ViewBag.Msg)
+<div class="row">
+<div class="col-md-6">
+    <p>
+        @Html.ActionLink("Create New", "Create", "BooksController", new { @class = "btn btn-success" })<br />
+
+    </p>
+</div>
+
+<div class="col-md-6">
+    <!--SEARCH-->
+    @using (Html.BeginForm("Search", "Books", FormMethod.Post, new { @class = "form-inline" }))
+
+    {
+        <label for="selectKriteria">Search by: </label>
+        <select name="selectKriteria" >
+
+            <option value="Title" selected="selected">Judul</option>
+            <option value="Author">Pengarang</option>
+        </select>
+        <input type="text" name="txtSearch"  />
+        <button type="submit" class="btn btn-success btn-sm">Search</button>
+    }
+</div>
+</div>
+<!--Book List-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var item in Model)
+        {
+                <div class="img" style="margin-left:0;">
+
+                    <a href="/Books/details/@item.BookID">
+                        <img align="middle" src="~/Content/Images/@item.CoverImage" />
+                    </a>
+                    <strong class="book-content"> @item.Title</strong> <br />
+                    <br />
+                    <p class="book-content">
+                        $ @item.Price.ToString("N0")<br />
+                        <a href="/Books/details/@item.BookID">Details</a>
+                    </p>
+                </div>
+        }
+        </div>
+    </div>
+</div>
+<!--table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoverImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publisher)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublicationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoverImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.BookID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.BookID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+            </td>
+        </tr>
+    }
+
+</!--table>-->
+
+

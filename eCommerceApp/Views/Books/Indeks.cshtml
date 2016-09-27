@@ -1,0 +1,44 @@
+﻿@model IEnumerable<eCommerceApp.ViewModel.BookVM>
+
+@{
+    ViewBag.Title = "Indeks";
+}
+<style>
+    option
+    {
+        display : inline;
+    }
+
+</style>
+<h2>Indeks</h2>
+@using (Html.BeginForm("Search", "Books", FormMethod.Post, new {@class="form-inline" } ))
+   
+{
+<label for="selectKriteria">Pilih Kriteria</label>
+<select name="selectKriteria">
+
+    <option value="Title" selected="selected">Judul</option>
+    <option value="Author">Pengarang</option>
+</select>
+<input type="text" name="txtSearch" class="form-control" />
+<button type="submit" class="btn btn-success" >Search</button>
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@foreach (var item in Model)
+{
+    <div class="col-md-4">
+        <div class="col-md-4">
+            <img width="100" src="~/Content/Images/@item.CoverImage" />
+        </div>
+        <div class="col-md-8">
+            <a href="/Books/detail/@item.BookID">
+                <strong>@item.Title</strong> </a> <br />
+                Pengarang : @item.FirstName &nbsp; @item.LastName <br />
+                Harga : Rp @item.Price.ToString("N0") <br />
+
+</div>
+       
+    </div>
+}

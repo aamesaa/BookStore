@@ -1,0 +1,101 @@
+﻿@model eCommerceApp.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3">
+            <img style="width:250px;" class="img-responsive" src="~/Content/Images/@Html.DisplayFor(model => model.CoverImage)" />
+
+        </div>
+
+        <div class="col-md-9 col-sm-9 col-xs93" style="padding-left:15px">
+            <dl class="dl-horizontal img-responsive">
+                <dt>
+                    Author
+                </dt>
+                <dd>
+                    @ViewBag.AuthorName
+                </dd>
+                
+                <dt>
+                    Category
+                </dt>
+
+                <dd>
+                   @ViewBag.CategoryName
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PublicationDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PublicationDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ISBN)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ISBN)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Publisher)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Publisher)
+                </dd>
+
+            </dl>
+            <div class="col-md-2"></div>
+            <div class="col-md-1" style="padding:0">
+               
+                <div class="btn btn-default">
+                    <a href="~/ShoppingCarts/AddToCart/@Html.DisplayFor(model => model.BookID)">
+                        Add to Cart
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<p>
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

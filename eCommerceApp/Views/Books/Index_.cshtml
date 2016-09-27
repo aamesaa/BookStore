@@ -1,0 +1,64 @@
+﻿@model IEnumerable<eCommerceApp.ViewModel.BookVM>
+
+@{
+    ViewBag.Title = "Index_";
+}
+
+<h2>Book List</h2>
+<!--ADD-->
+<div class="row">
+    
+    <!--ADD-->
+   <div class="col-md-6" style="padding-left:30px;">
+        <p>
+            
+        </p>
+    </div>
+    <!--SEARCH-->
+    <div class="col-md-6" style="padding-left:102px;">
+
+        @using (Html.BeginForm("Search", "Books", FormMethod.Post, new { @class = "form-inline" }))
+
+    {
+            <label for="selectKriteria">Search by: </label>
+            <select name="selectKriteria">
+
+                <option value="Title" selected="selected">Judul</option>
+                <option value="Author">Pengarang</option>
+            </select>
+            <input type="text" name="txtSearch" />
+            <button type="submit" class="btn btn-success btn-sm">Search</button>
+    }
+    </div>
+</div>
+@Html.Raw(ViewBag.Msg)
+<!--Book List-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var item in Model)
+            {
+                <div class="img" style="margin-left:0;">
+
+                    <a href="/Books/details/@item.BookID">
+                        <img align="middle" src="~/Content/Images/@item.CoverImage" />
+                    </a>
+                    <strong class="book-content"> @item.Title</strong> <br />
+                    <br />
+                    <p class="book-content">
+                        @item.FirstName @item.LastName <br />
+                        Rp @item.Price.ToString("N0")<br />
+                        
+                        <span>
+                            <a href="~/ShoppingCarts/AddToCart/@item.BookID">
+                                Add to Cart
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                            </a>
+                        </span>
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
